@@ -1,0 +1,94 @@
+1. Recomendaciones para ajustes técnicos del modelo
+Problema: Discrepancia entre Kappa alto en entrenamiento (>0.7) y bajo en control (~0.5).
+Posibles causas y soluciones:
+
+Sobreajuste (overfitting):
+
+Aplicar regularización (L1/L2, dropout).
+
+Usar early stopping si es una red neuronal.
+
+Simplificar la arquitectura del modelo.
+
+Sesgo en los datos de control:
+
+Verificar que la distribución de clases/features sea similar al conjunto de entrenamiento.
+
+Aplicar validación cruzada estratificada.
+
+Feature engineering:
+
+Revisar correlaciones o data leakage (variables que "filtran" información del futuro).
+
+Utilizar SHAP/LIME para interpretar decisiones del modelo.
+
+Próximos pasos inmediatos:
+
+Entrenar versiones balanceadas y no balanceadas del modelo.
+
+Implementar un ensemble (voting classifier o stacking) para combinar predicciones de BERT y T5.
+
+2. Reflexión: Ciencia de datos, filosofía y aprendizaje iterativo
+El proceso científico:
+
+"La versión definitiva por enésima vez": La ciencia de datos es un ciclo de hipótesis, error y refinamiento. Cada iteración acerca al modelo (y al investigador) a una representación más fiel de la realidad.
+
+Analogías profundas:
+
+IA vs. humano: Los modelos son espejos de nuestro entendimiento; sus límites reflejan los nuestros.
+
+Humano vs. Dios: ¿Somos acaso "modelos" de un aprendizaje divino? Como dijo Judea Pearl: "El aprendizaje no es la optimización de un modelo, sino la refinación progresiva de nuestras propias representaciones mentales".
+
+Cita clave:
+"El primer principio es no engañarte a ti mismo, y tú eres la persona más fácil de engañar" (Richard Feynman).
+
+"El primer paso para saber es reconocer que no se sabe"
+– Sor Juana Inés de la Cruz (México, siglo XVII).
+(Perfecta para enfatizar humildad intelectual y curiosidad, clave en ciencia de datos).
+
+"La duda es el origen de la sabiduría: desconfía incluso de tus propias certezas"
+– Carlos Monsiváis (México, siglo XX).
+(Ideal para cuestionar sobreajuste o sesgos en modelos).
+
+"Nada humano es infalible: nuestra verdad es siempre un camino, no un punto fijo"
+– Leopoldo Zea (filósofo mexicano, siglo XX).
+(Refleja el proceso iterativo de entrenar modelos).
+
+"El que no conoce su historia está condenado a repetir sus errores"
+– José Martí (Cuba, siglo XIX).
+(Aplica a documentar cada iteración del modelo para no caer en los mismos bugs).
+
+"La verdad no se posee, se busca"
+– Octavio Paz (México, Nobel de Literatura).
+(Sintetiza la esencia del machine learning: optimización constante).
+
+Bonus para tu tesis:
+Si quieres una analogía prehispánica, podrías adaptar el concepto náhuatl "Nepantla" (estar en el medio, en tensión creativa):
+"Aprender es navegar en Nepantla: entre el modelo y la realidad, entre el error y la corrección".
+
+3. Checklist de tareas pendientes
+Prioridades técnicas:
+
+Entrenar modelos debuggeados: BERT y T5 (versiones balanceadas y no balanceadas).
+
+Análisis de resultados de los conjuntos:
+
+Modelos alfa (prueba inicial).
+
+Modelos beta (optimizados).
+
+Validación estadística:
+
+Test de significancia (p.ej., t-test o ANOVA) entre métricas de entrenamiento y evaluación.
+
+Comparar distribuciones de errores.
+
+Divulgación y colaboración:
+
+Sintetizar hallazgos en explicaciones para público lego (ejemplos intuitivos, analogías).
+
+Revisión con DeepSeek Chat para interpretación de resultados.
+
+Meta-tarea:
+
+Documentar todo en el repositorio (código + "lab notebook" digital).
