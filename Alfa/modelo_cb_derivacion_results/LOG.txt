@@ -1,0 +1,84 @@
+(venv) PS C:\Users\xiute\Desktop\TriageIA> python berttrainer.py
+🔼 Selecciona el archivo CSV con tus datos
+✅ Archivo cargado: C:/Users/xiute/Desktop/TriageIA/dbmod.csv
+
+📊 Distribución inicial de clases:
+PRIORIDAD: {'IV': 234, 'III': 1482, 'II': 226, 'I': 75}
+DERIVACION: {'ALTA': 234, 'CONSULTA DE': 1708, 'INGRESA A': 75}
+ESPECIALIDAD: {'SIN ESPECIALIDAD': 229, 'OTORRINOLARINGOLOGIA': 70, 'URGENCIAS': 733, 'ORTOPEDIA': 275, 'OFTALMOLOGIA': 118, 'CIRUGIA': 396, 'RECONSTRUCTIVA': 118, 'UROLOGIA': 78}
+IDX: {'INFECCION DE TEJIDOS BLANDOS': 33, 'SINTOMAS NEUROLOGICOS AGUDOS': 91, 'HEMORRAGIA DIGESTIVA': 45, 'FRACTURAS, ESGUINCES Y OTROS SINTOMAS DEL SISTEMA OSTEOMUSCULAR': 278, 'DESEQUILIBROS HIDROELECTROLITICOS': 30, 'CONJUNTIVITIS, TRAUMA OCULAR Y OTRAS PATOLOGIAS DEL OJO Y SUS ANEXOS': 124, 'EVENTO VASCULAR CEREBRAL': 9, 'DOLOR ABDOMINAL': 381, 'FRACTURA NASAL Y EPISTAXIS': 26, 'TRAUMATISMO Y HERIDAS EN MANO': 92, 'INFECCION DE VIAS URINARIAS': 60, 'LITIASIS URINARIA, RETENCION AGUDA DE ORINA Y OTRAS PATOLOGIAS UROLOGICAS': 104, 'FIEBRE EN ESTUDIO': 9, 'HEMATURIA': 15, 'NEUMONIA': 22, 'HIPERTENSION DESCONTROLADA': 34, 'DIARREA Y GASTROENTERITIS': 35, 'DIABETES MELLITUS DESCOMPENSADA': 77, 'TRAUMATISMO CRANEOENCEFALICO': 41, 'INSUFICIENCIA HEPATICA': 16, 'OTROS': 120, 'POLICONTUNDIDO': 97, 'ANEMIA': 6, 'TROMBOSIS': 16, 'ABSCESO ANAL Y HEMORROIDES': 26, 'OTRAS PATOLOGIAS DE OIDO, NARIZ, BOCA Y CUELLO': 22, 'INFECCION RESPIRATORIA ALTA': 18, 'INSUFICIENCIA RESPIRATORIA': 16, 'OTITIS': 15, 'DOLOR PRECORDIAL': 49, 'CHOQUE': 16, 'VERTIGO': 13, 'INSUFICIENCIA RENAL': 16, 'HERIDA EN ROSTRO': 22, 'INTOXICACION': 18, 'INSUFICIENCIA CARDIACA': 6, 'HERIDA CON ARMA': 12, 'ARRITMIA': 2, 'QUEMADURA': 5}
+
+============================================================
+🔧 ENTRENANDO MODELO PARA: DERIVACION
+============================================================
+
+🚀 Iniciando entrenamiento para DERIVACION
+
+⚖️ Balanceando clases para DERIVACION...
+Distribución original: Counter({'CONSULTA DE': 1708, 'ALTA': 234, 'INGRESA A': 75})
+Nueva distribución (450 muestras): Counter({'ALTA': 150, 'CONSULTA DE': 150, 'INGRESA A': 150})
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at emilyalsentzer/Bio_ClinicalBERT and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+⏳ Iniciando entrenamiento...
+  0%|                                                                                                       | 0/225 [00:00<?, ?it/s]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 1.0518, 'grad_norm': 11.713324546813965, 'learning_rate': 2.94e-05, 'epoch': 1.11}
+{'eval_loss': 0.9309229254722595, 'eval_kappa': 0.3833333333333333, 'eval_accuracy': 0.5888888888888889, 'eval_f1': 0.5434006577549161, 'eval_precision': 0.6695025404702823, 'eval_recall': 0.5888888888888889, 'eval_report': {'0': {'precision': 0.6129032258064516, 'recall': 0.6333333333333333, 'f1-score': 0.6229508196721312, 'support': 30.0}, '1': {'precision': 0.8571428571428571, 'recall': 0.2, 'f1-score': 0.32432432432432434, 'support': 30.0}, '2': {'precision': 0.5384615384615384, 'recall': 0.9333333333333333, 'f1-score': 0.6829268292682927, 'support': 30.0}, 'accuracy': 0.5888888888888889, 'macro avg': {'precision': 0.6695025404702823, 'recall': 0.5888888888888889, 'f1-score': 0.5434006577549161, 'support': 90.0}, 'weighted avg': {'precision': 0.6695025404702823, 'recall': 0.5888888888888889, 'f1-score': 0.5434006577549161, 'support': 90.0}}, 'eval_runtime': 32.0295, 'eval_samples_per_second': 2.81, 'eval_steps_per_second': 0.187, 'epoch': 1.11}
+ 40%|█████████████████████████████████████▌                                                        | 90/225 [18:36<26:31, 11.79s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 0.7261, 'grad_norm': 17.797523498535156, 'learning_rate': 2.16e-05, 'epoch': 2.22}
+{'eval_loss': 0.6013655066490173, 'eval_kappa': 0.65, 'eval_accuracy': 0.7666666666666667, 'eval_f1': 0.7698085081986009, 'eval_precision': 0.8042328042328042, 'eval_recall': 0.7666666666666667, 'eval_report': {'0': {'precision': 0.9047619047619048, 'recall': 0.6333333333333333, 'f1-score': 0.7450980392156863, 'support': 30.0}, '1': {'precision': 0.6190476190476191, 'recall': 0.8666666666666667, 'f1-score': 0.7222222222222222, 'support': 30.0}, '2': {'precision': 0.8888888888888888, 'recall': 0.8, 'f1-score': 0.8421052631578947, 'support': 30.0}, 'accuracy': 0.7666666666666667, 'macro avg': {'precision': 0.8042328042328042, 'recall': 0.7666666666666666, 'f1-score': 0.7698085081986011, 'support': 90.0}, 'weighted avg': {'precision': 0.8042328042328042, 'recall': 0.7666666666666667, 'f1-score': 0.7698085081986009, 'support': 90.0}}, 'eval_runtime': 31.4591, 'eval_samples_per_second': 2.861, 'eval_steps_per_second': 0.191, 'epoch': 2.22}
+ 60%|███████████████████████████████████████████████████████▊                                     | 135/225 [28:45<19:05, 12.73s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 0.481, 'grad_norm': 10.312204360961914, 'learning_rate': 1.3028571428571429e-05, 'epoch': 3.33}
+{'eval_loss': 0.42719709873199463, 'eval_kappa': 0.75, 'eval_accuracy': 0.8333333333333334, 'eval_f1': 0.832008469166939, 'eval_precision': 0.8410394265232974, 'eval_recall': 0.8333333333333334, 'eval_report': {'0': {'precision': 0.9166666666666666, 'recall': 0.7333333333333333, 'f1-score': 0.8148148148148148, 'support': 30.0}, '1': {'precision': 0.8064516129032258, 'recall': 0.8333333333333334, 'f1-score': 0.819672131147541, 'support': 30.0}, '2': {'precision': 0.8, 'recall': 0.9333333333333333, 'f1-score': 0.8615384615384616, 'support': 30.0}, 'accuracy': 0.8333333333333334, 'macro avg': {'precision': 0.8410394265232976, 'recall': 0.8333333333333334, 'f1-score': 0.8320084691669392, 'support': 90.0}, 'weighted avg': {'precision': 0.8410394265232974, 'recall': 0.8333333333333334, 'f1-score': 0.832008469166939, 'support': 90.0}}, 'eval_runtime': 32.7621, 'eval_samples_per_second': 2.747, 'eval_steps_per_second': 0.183, 'epoch': 3.33}
+ 80%|██████████████████████████████████████████████████████████████████████████▍                  | 180/225 [38:32<08:58, 11.97s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 0.2695, 'grad_norm': 38.97858810424805, 'learning_rate': 4.457142857142857e-06, 'epoch': 4.44}
+{'eval_loss': 0.3332357406616211, 'eval_kappa': 0.8166666666666667, 'eval_accuracy': 0.8777777777777778, 'eval_f1': 0.8747609289617486, 'eval_precision': 0.8787223276407337, 'eval_recall': 0.8777777777777778, 'eval_report': {'0': {'precision': 0.8529411764705882, 'recall': 0.9666666666666667, 'f1-score': 0.90625, 'support': 30.0}, '1': {'precision': 0.88, 'recall': 0.7333333333333333, 'f1-score': 0.8, 'support': 30.0}, '2': {'precision': 0.9032258064516129, 'recall': 0.9333333333333333, 'f1-score': 0.9180327868852459, 'support': 30.0}, 'accuracy': 0.8777777777777778, 'macro avg': {'precision': 0.8787223276407338, 'recall': 0.8777777777777778, 'f1-score': 0.8747609289617486, 'support': 90.0}, 'weighted avg': {'precision': 0.8787223276407337, 'recall': 0.8777777777777778, 'f1-score': 0.8747609289617486, 'support': 90.0}}, 'eval_runtime': 34.8827, 'eval_samples_per_second': 2.58, 'eval_steps_per_second': 0.172, 'epoch': 4.44}
+{'train_runtime': 2900.2312, 'train_samples_per_second': 0.621, 'train_steps_per_second': 0.078, 'train_loss': 0.5803146976894803, 'epoch': 5.0}
+100%|█████████████████████████████████████████████████████████████████████████████████████████████| 225/225 [48:20<00:00, 12.89s/it]
+C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:27<00:00,  4.59s/it]
+
+📊 Resultados finales para DERIVACION:
+► Kappa: 0.817
+► Accuracy: 0.878
+► F1-Score: 0.875
+► Precision: 0.879
+► Recall: 0.878
+► Loss: 0.333
+
+📝 Reporte de Clasificación Detallado:
+
+🔹 Clase 0:
+   precision: 0.853
+      recall: 0.967
+    f1-score: 0.906
+     support: 30.000
+
+🔹 Clase 1:
+   precision: 0.880
+      recall: 0.733
+    f1-score: 0.800
+     support: 30.000
+
+🔹 Clase 2:
+   precision: 0.903
+      recall: 0.933
+    f1-score: 0.918
+     support: 30.000
+
+🔹 Clase macro avg:
+   precision: 0.879
+      recall: 0.878
+    f1-score: 0.875
+     support: 90.000
+
+🔹 Clase weighted avg:
+   precision: 0.879
+      recall: 0.878
+    f1-score: 0.875
+     support: 90.000
