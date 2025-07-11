@@ -91,15 +91,14 @@ def cargar_datos():
 # =============================
 def preprocesar_datos(df):
     # Limpieza manteniendo tus reglas originales
-    df = df.dropna(subset=["MOTIVO", "EDAD", "GENERO", "FC", "FR", "TAS", "TAD", "SAO2", "TEMP", "NEWS2"])
+    df = df.dropna(subset=["MOTIVO", "EDAD", "GENERO", "FC", "FR", "TAS", "SAO2", "TEMP", "NEWS2"])
 
     # Optimizar tipos de datos
     tipos_optimizados = {
         'EDAD': 'int8',
         'FC': 'int16',
         'FR': 'int8',
-        'TAS': 'int16',
-        'TAD': 'int8',
+        'TAS': 'int8',
         'SAO2': 'int8',
         'TEMP': 'float32',
         'NEWS2': 'int8'
@@ -109,7 +108,7 @@ def preprocesar_datos(df):
     # Texto de entrada modificado: datos estructurados primero, motivo al final
     df["input_text"] = df.apply(lambda x:
         f"[EDAD] {x['EDAD']} [GENERO] {x['GENERO']} [FC] {x['FC']} [FR] {x['FR']} "
-        f"[TAS] {x['TAS']} [TAD] {x['TAD']} [SAO2] {x['SAO2']} [TEMP] {x['TEMP']} [NEWS2] {x['NEWS2']} "
+        f"[TAS] {x['TAS']} [SAO2] {x['SAO2']} [TEMP] {x['TEMP']} [NEWS2] {x['NEWS2']} "
         f"[MOTIVO] {x['MOTIVO']}", axis=1)
 
     return df
@@ -117,7 +116,7 @@ def preprocesar_datos(df):
 # =============================
 # 5. BALANCEO INTELIGENTE DE CLASES (VERSIÓN OPTIMIZADA)
 # =============================
-def balancear_clases(df, etiqueta, target_samples=146):
+def balancear_clases(df, etiqueta, target_samples=300):
     print(f"\n⚖️ Balanceando clases para {etiqueta}...")
     counter = Counter(df[etiqueta])
     print(f"Distribución original: {counter}")
@@ -154,7 +153,7 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
     print(f"\n🚀 Iniciando entrenamiento para {etiqueta} con T5")
 
     # 1. Balancear datos
-    df_balanced = balancear_clases(df, etiqueta, target_samples=146)
+    df_balanced = balancear_clases(df, etiqueta, target_samples=300)
 
     # 2. Dividir datos
     train_df, test_df = train_test_split(
@@ -219,15 +218,15 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
     args = TrainingArguments(
         output_dir=f"./{nombre_modelo}_results",
         eval_strategy="steps",  # Cambiado de evaluation_strategy
-        eval_steps=150,
+        eval_steps=50,
         save_strategy="steps",  # Cambiado de save_strategy
-        save_steps=150,
-        learning_rate=2e-5,
+        save_steps=50,
+        learning_rate=3e-5,
         per_device_train_batch_size=16 if torch.cuda.is_available() else 8,
         per_device_eval_batch_size=32 if torch.cuda.is_available() else 16,
         num_train_epochs=5,
         weight_decay=0.01,
-        warmup_steps=150,
+        warmup_steps=50,
         logging_dir=f"./{nombre_modelo}_logs",
         load_best_model_at_end=True,
         metric_for_best_model="eval_kappa",
@@ -235,7 +234,7 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
         fp16=torch.cuda.is_available(),
         report_to="none",
         optim="adamw_torch",
-        logging_steps=150,
+        logging_steps=50,
         dataloader_num_workers=4 if torch.cuda.is_available() else 0,
         gradient_accumulation_steps=2 if torch.cuda.is_available() else 1,
         seed=42
@@ -244,14 +243,7 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
     # 7. Función para calcular métricas extendidas (adaptada para T5)
     def compute_metrics(eval_pred):
         preds, labels = eval_pred
-        if isinstance(preds, tuple):
-            preds = preds[0]  # Tomar solo las predicciones si vienen en una tupla
-
-        # Decodificar predicciones (asegurarse de que son tensores)
-        if isinstance(preds, np.ndarray):
-            preds = torch.from_numpy(preds)
-
-        decoded_preds = tokenizer.batch_decode(preds.argmax(dim=-1), skip_special_tokens=True)
+        decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
 
         # Reemplazar -100 en labels (ignorados por la loss)
         labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
@@ -261,8 +253,8 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
         unique_labels = sorted(df[etiqueta].unique())
         label_to_id = {label: idx for idx, label in enumerate(unique_labels)}
 
-        preds_numeric = [label_to_id.get(pred.strip(), 0) for pred in decoded_preds]
-        labels_numeric = [label_to_id.get(label.strip(), 0) for label in decoded_labels]
+        preds_numeric = [label_to_id.get(pred, 0) for pred in decoded_preds]
+        labels_numeric = [label_to_id.get(label, 0) for label in decoded_labels]
 
         # Calcular métricas
         kappa = cohen_kappa_score(labels_numeric, preds_numeric)

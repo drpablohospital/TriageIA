@@ -330,8 +330,8 @@ if __name__ == "__main__":
 
         # Configuración de modelos
         config_modelos = [
-            {"etiqueta": "PRIORIDAD", "nombre_modelo": "modelo_cb_prioridad"},
-            #{"etiqueta": "IDX", "nombre_modelo": "modelo_cb_idx"},
+            #{"etiqueta": "PRIORIDAD", "nombre_modelo": "modelo_cb_prioridad"},
+            {"etiqueta": "IDX", "nombre_modelo": "modelo_cb_idx"},
             #{"etiqueta": "DERIVACION", "nombre_modelo": "modelo_cb_derivacion"},
             #{"etiqueta": "ESPECIALIDAD", "nombre_modelo": "modelo_cb_especialidad"}
         ]

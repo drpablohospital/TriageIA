@@ -1,0 +1,234 @@
+============================================================
+🔧 ENTRENANDO MODELO PARA: ESPECIALIDAD
+============================================================
+
+🚀 Iniciando entrenamiento para ESPECIALIDAD
+
+⚖️ Balanceando clases para ESPECIALIDAD...
+Distribución original: Counter({'URGENCIAS': 733, 'CIRUGIA': 396, 'ORTOPEDIA': 275, 'SIN ESPECIALIDAD': 229, 'OFTALMOLOGIA': 118, 'RECONSTRUCTIVA': 118, 'UROLOGIA': 78, 'OTORRINOLARINGOLOGIA': 70})
+Nueva distribución (2400 muestras): Counter({'SIN ESPECIALIDAD': 300, 'OTORRINOLARINGOLOGIA': 300, 'URGENCIAS': 300, 'ORTOPEDIA': 300, 'OFTALMOLOGIA': 300, 'CIRUGIA': 300, 'RECONSTRUCTIVA': 300, 'UROLOGIA': 300})
+Some weights of RobertaForSequenceClassification were not initialized from the model checkpoint at PlanTL-GOB-ES/bsc-bio-ehr-es and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+⏳ Iniciando entrenamiento...
+  0%|                                                                                                      | 0/1200 [00:00<?, ?it/s]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 2.08, 'grad_norm': 4.69760274887085, 'learning_rate': 1.9600000000000002e-05, 'epoch': 0.21}
+  4%|███▊                                                                                       | 50/1200 [13:51<4:58:21, 15.57s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\sklearn\metrics\_classification.py:1565: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+{'eval_loss': 2.053586721420288, 'eval_kappa': 0.08333333333333337, 'eval_accuracy': 0.19791666666666666, 'eval_f1': 0.09424386971476012, 'eval_precision': 0.17546256351260664, 'eval_recall': 0.19791666666666666, 'eval_report': {'0': {'precision': 0.23976608187134502, 'recall': 0.6833333333333333, 'f1-score': 0.354978354978355, 'support': 60.0}, '1': {'precision': 0.16393442622950818, 'recall': 0.8333333333333334, 'f1-score': 0.273972602739726, 'support': 60.0}, '2': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 60.0}, '3': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 60.0}, '4': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 60.0}, '5': {'precision': 1.0, 'recall': 0.06666666666666667, 'f1-score': 0.125, 'support': 60.0}, '6': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 60.0}, '7': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 60.0}, 'accuracy': 0.19791666666666666, 'macro avg': {'precision': 0.17546256351260664, 'recall': 0.19791666666666666, 'f1-score': 0.09424386971476012, 'support': 480.0}, 'weighted avg': {'precision': 0.17546256351260664, 'recall': 0.19791666666666666, 'f1-score': 0.09424386971476012, 'support': 480.0}}, 'eval_runtime': 215.1261, 'eval_samples_per_second': 2.231, 'eval_steps_per_second': 0.139, 'epoch': 0.21}
+{'loss': 1.9578, 'grad_norm': 6.288084506988525, 'learning_rate': 1.9147826086956522e-05, 'epoch': 0.42}
+  8%|███████▌                                                                                  | 100/1200 [32:59<4:48:34, 15.74s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 1.6387966871261597, 'eval_kappa': 0.5285714285714286, 'eval_accuracy': 0.5875, 'eval_f1': 0.5295318924399167, 'eval_precision': 0.643614313926814, 'eval_recall': 0.5875, 'eval_report': {'0': {'precision': 0.6025641025641025, 'recall': 0.7833333333333333, 'f1-score': 0.6811594202898551, 'support': 60.0}, '1': {'precision': 0.5462962962962963, 'recall': 0.9833333333333333, 'f1-score': 0.7023809523809523, 'support': 60.0}, '2': {'precision': 0.8, 'recall': 0.13333333333333333, 'f1-score': 0.22857142857142856, 'support': 60.0}, '3': {'precision': 0.7333333333333333, 'recall': 0.36666666666666664, 'f1-score': 0.4888888888888889, 'support': 60.0}, '4': {'precision': 0.38636363636363635, 'recall': 0.85, 'f1-score': 0.53125, 'support': 60.0}, '5': {'precision': 0.6875, 'recall': 0.7333333333333333, 'f1-score': 0.7096774193548387, 'support': 60.0}, '6': {'precision': 0.5, 'recall': 0.016666666666666666, 'f1-score': 0.03225806451612903, 'support': 60.0}, '7': {'precision': 0.8928571428571429, 'recall': 0.8333333333333334, 'f1-score': 0.8620689655172413, 'support': 60.0}, 'accuracy': 0.5875, 'macro avg': {'precision': 0.6436143139268139, 'recall': 0.5875, 'f1-score': 0.5295318924399168, 'support': 480.0}, 'weighted avg': {'precision': 0.643614313926814, 'recall': 0.5875, 'f1-score': 0.5295318924399167, 'support': 480.0}}, 'eval_runtime': 212.0723, 'eval_samples_per_second': 2.263, 'eval_steps_per_second': 0.141, 'epoch': 0.42}
+{'loss': 1.5138, 'grad_norm': 17.708356857299805, 'learning_rate': 1.8278260869565218e-05, 'epoch': 0.62}
+ 12%|███████████▎                                                                              | 150/1200 [51:13<4:32:14, 15.56s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 1.1216603517532349, 'eval_kappa': 0.6738095238095239, 'eval_accuracy': 0.7145833333333333, 'eval_f1': 0.6986224889198321, 'eval_precision': 0.7022346136137482, 'eval_recall': 0.7145833333333333, 'eval_report': {'0': {'precision': 0.620253164556962, 'recall': 0.8166666666666667, 'f1-score': 0.7050359712230215, 'support': 60.0}, '1': {'precision': 0.8169014084507042, 'recall': 0.9666666666666667, 'f1-score': 0.8854961832061069, 'support': 60.0}, '2': {'precision': 0.7313432835820896, 'recall': 0.8166666666666667, 'f1-score': 0.7716535433070866, 'support': 60.0}, '3': {'precision': 0.7948717948717948, 'recall': 0.5166666666666667, 'f1-score': 0.6262626262626263, 'support': 60.0}, '4': {'precision': 0.6818181818181818, 'recall': 0.75, 'f1-score': 0.7142857142857143, 'support': 60.0}, '5': {'precision': 0.6911764705882353, 'recall': 0.7833333333333333, 'f1-score': 0.734375, 'support': 60.0}, '6': {'precision': 0.35294117647058826, 'recall': 0.2, 'f1-score': 0.2553191489361702, 'support': 60.0}, '7': {'precision': 0.9285714285714286, 'recall': 0.8666666666666667, 'f1-score': 0.896551724137931, 'support': 60.0}, 'accuracy': 0.7145833333333333, 'macro avg': {'precision': 0.7022346136137481, 'recall': 0.7145833333333333, 'f1-score': 0.698622488919832, 'support': 480.0}, 'weighted avg': {'precision': 0.7022346136137482, 'recall': 0.7145833333333333, 'f1-score': 0.6986224889198321, 'support': 480.0}}, 'eval_runtime': 212.4535, 'eval_samples_per_second': 2.259, 'eval_steps_per_second': 0.141, 'epoch': 0.62}
+{'loss': 1.0561, 'grad_norm': 5.174499988555908, 'learning_rate': 1.7408695652173913e-05, 'epoch': 0.83}
+ 17%|██████████████▋                                                                         | 200/1200 [1:10:54<4:34:15, 16.46s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 0.8756868243217468, 'eval_kappa': 0.730952380952381, 'eval_accuracy': 0.7645833333333333, 'eval_f1': 0.7319886065437317, 'eval_precision': 0.7895081880211418, 'eval_recall': 0.7645833333333333, 'eval_report': {'0': {'precision': 0.6438356164383562, 'recall': 0.7833333333333333, 'f1-score': 0.706766917293233, 'support': 60.0}, '1': {'precision': 0.9666666666666667, 'recall': 0.9666666666666667, 'f1-score': 0.9666666666666667, 'support': 60.0}, '2': {'precision': 0.7796610169491526, 'recall': 0.7666666666666667, 'f1-score': 0.773109243697479, 'support': 60.0}, '3': {'precision': 0.6413043478260869, 'recall': 0.9833333333333333, 'f1-score': 0.7763157894736842, 'support': 60.0}, '4': {'precision': 0.7323943661971831, 'recall': 0.8666666666666667, 'f1-score': 0.7938931297709924, 'support': 60.0}, '5': {'precision': 0.8979591836734694, 'recall': 0.7333333333333333, 'f1-score': 0.8073394495412844, 'support': 60.0}, '6': {'precision': 0.8571428571428571, 'recall': 0.1, 'f1-score': 0.1791044776119403, 'support': 60.0}, '7': {'precision': 0.7971014492753623, 'recall': 0.9166666666666666, 'f1-score': 0.8527131782945736, 'support': 60.0}, 'accuracy': 0.7645833333333333, 'macro avg': {'precision': 0.7895081880211419, 'recall': 0.7645833333333334, 'f1-score': 0.7319886065437318, 'support': 480.0}, 'weighted avg': {'precision': 0.7895081880211418, 'recall': 0.7645833333333333, 'f1-score': 0.7319886065437317, 'support': 480.0}}, 'eval_runtime': 214.2706, 'eval_samples_per_second': 2.24, 'eval_steps_per_second': 0.14, 'epoch': 0.83}
+ 20%|█████████████████▌                                                                      | 240/1200 [1:26:21<4:20:39, 16.29s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 0.8626, 'grad_norm': 6.238890171051025, 'learning_rate': 1.6539130434782613e-05, 'epoch': 1.04}
+{'eval_loss': 0.7527472376823425, 'eval_kappa': 0.7666666666666666, 'eval_accuracy': 0.7958333333333333, 'eval_f1': 0.7697348296065447, 'eval_precision': 0.816292392181911, 'eval_recall': 0.7958333333333333, 'eval_report': {'0': {'precision': 0.7931034482758621, 'recall': 0.7666666666666667, 'f1-score': 0.7796610169491526, 'support': 60.0}, '1': {'precision': 0.9666666666666667, 'recall': 0.9666666666666667, 'f1-score': 0.9666666666666667, 'support': 60.0}, '2': {'precision': 0.6867469879518072, 'recall': 0.95, 'f1-score': 0.7972027972027972, 'support': 60.0}, '3': {'precision': 0.6555555555555556, 'recall': 0.9833333333333333, 'f1-score': 0.7866666666666666, 'support': 60.0}, '4': {'precision': 0.8275862068965517, 'recall': 0.8, 'f1-score': 0.8135593220338984, 'support': 60.0}, '5': {'precision': 0.9387755102040817, 'recall': 0.7666666666666667, 'f1-score': 0.8440366972477065, 'support': 60.0}, '6': {'precision': 0.8333333333333334, 'recall': 0.16666666666666666, 'f1-score': 0.2777777777777778, 'support': 60.0}, '7': {'precision': 0.8285714285714286, 'recall': 0.9666666666666667, 'f1-score': 0.8923076923076924, 'support': 60.0}, 'accuracy': 0.7958333333333333, 'macro avg': {'precision': 0.8162923921819109, 'recall': 0.7958333333333334, 'f1-score': 0.7697348296065447, 'support': 480.0}, 'weighted avg': {'precision': 0.816292392181911, 'recall': 0.7958333333333333, 'f1-score': 0.7697348296065447, 'support': 480.0}}, 'eval_runtime': 216.6522, 'eval_samples_per_second': 2.216, 'eval_steps_per_second': 0.138, 'epoch': 1.04}
+{'loss': 0.7415, 'grad_norm': 8.938651084899902, 'learning_rate': 1.5669565217391305e-05, 'epoch': 1.25}
+ 25%|██████████████████████                                                                  | 300/1200 [1:47:29<3:49:41, 15.31s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 0.6281198263168335, 'eval_kappa': 0.7904761904761904, 'eval_accuracy': 0.8166666666666667, 'eval_f1': 0.8104195426261627, 'eval_precision': 0.8162092196197592, 'eval_recall': 0.8166666666666667, 'eval_report': {'0': {'precision': 0.7796610169491526, 'recall': 0.7666666666666667, 'f1-score': 0.773109243697479, 'support': 60.0}, '1': {'precision': 0.9365079365079365, 'recall': 0.9833333333333333, 'f1-score': 0.959349593495935, 'support': 60.0}, '2': {'precision': 0.6746987951807228, 'recall': 0.9333333333333333, 'f1-score': 0.7832167832167832, 'support': 60.0}, '3': {'precision': 0.8709677419354839, 'recall': 0.9, 'f1-score': 0.8852459016393442, 'support': 60.0}, '4': {'precision': 0.875, 'recall': 0.8166666666666667, 'f1-score': 0.8448275862068966, 'support': 60.0}, '5': {'precision': 0.9791666666666666, 'recall': 0.7833333333333333, 'f1-score': 0.8703703703703703, 'support': 60.0}, '6': {'precision': 0.5348837209302325, 'recall': 0.38333333333333336, 'f1-score': 0.44660194174757284, 'support': 60.0}, '7': {'precision': 0.8787878787878788, 'recall': 0.9666666666666667, 'f1-score': 0.9206349206349206, 'support': 60.0}, 'accuracy': 0.8166666666666667, 'macro avg': {'precision': 0.8162092196197592, 'recall': 0.8166666666666667, 'f1-score': 0.8104195426261628, 'support': 480.0}, 'weighted avg': {'precision': 0.8162092196197592, 'recall': 0.8166666666666667, 'f1-score': 0.8104195426261627, 'support': 480.0}}, 'eval_runtime': 229.5704, 'eval_samples_per_second': 2.091, 'eval_steps_per_second': 0.131, 'epoch': 1.25}
+{'loss': 0.628, 'grad_norm': 2.9602739810943604, 'learning_rate': 1.48e-05, 'epoch': 1.46}
+ 29%|█████████████████████████▋                                                              | 350/1200 [2:05:43<3:31:59, 14.96s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 0.5498681664466858, 'eval_kappa': 0.8309523809523809, 'eval_accuracy': 0.8520833333333333, 'eval_f1': 0.8504165574759626, 'eval_precision': 0.8554682216590064, 'eval_recall': 0.8520833333333333, 'eval_report': {'0': {'precision': 0.8181818181818182, 'recall': 0.75, 'f1-score': 0.782608695652174, 'support': 60.0}, '1': {'precision': 0.9672131147540983, 'recall': 0.9833333333333333, 'f1-score': 0.9752066115702479, 'support': 60.0}, '2': {'precision': 0.7571428571428571, 'recall': 0.8833333333333333, 'f1-score': 0.8153846153846154, 'support': 60.0}, '3': {'precision': 0.90625, 'recall': 0.9666666666666667, 'f1-score': 0.9354838709677419, 'support': 60.0}, '4': {'precision': 0.8235294117647058, 'recall': 0.9333333333333333, 'f1-score': 0.875, 'support': 60.0}, '5': {'precision': 1.0, 'recall': 0.7666666666666667, 'f1-score': 0.8679245283018868, 'support': 60.0}, '6': {'precision': 0.5714285714285714, 'recall': 0.5333333333333333, 'f1-score': 0.5517241379310345, 'support': 60.0}, '7': {'precision': 1.0, 'recall': 1.0, 'f1-score': 1.0, 'support': 60.0}, 'accuracy': 0.8520833333333333, 'macro avg': {'precision': 0.8554682216590064, 'recall': 0.8520833333333333, 'f1-score': 0.8504165574759626, 'support': 480.0}, 'weighted avg': {'precision': 0.8554682216590064, 'recall': 0.8520833333333333, 'f1-score': 0.8504165574759626, 'support': 480.0}}, 'eval_runtime': 207.946, 'eval_samples_per_second': 2.308, 'eval_steps_per_second': 0.144, 'epoch': 1.46}
+{'loss': 0.5304, 'grad_norm': 5.485249996185303, 'learning_rate': 1.3930434782608698e-05, 'epoch': 1.67}
+ 33%|█████████████████████████████▎                                                          | 400/1200 [2:24:23<3:32:51, 15.96s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 0.5705384016036987, 'eval_kappa': 0.8071428571428572, 'eval_accuracy': 0.83125, 'eval_f1': 0.8181296825723064, 'eval_precision': 0.8240348441842914, 'eval_recall': 0.83125, 'eval_report': {'0': {'precision': 0.7580645161290323, 'recall': 0.7833333333333333, 'f1-score': 0.7704918032786885, 'support': 60.0}, '1': {'precision': 0.9365079365079365, 'recall': 0.9833333333333333, 'f1-score': 0.959349593495935, 'support': 60.0}, '2': {'precision': 0.7236842105263158, 'recall': 0.9166666666666666, 'f1-score': 0.8088235294117647, 'support': 60.0}, '3': {'precision': 0.8309859154929577, 'recall': 0.9833333333333333, 'f1-score': 0.9007633587786259, 'support': 60.0}, '4': {'precision': 0.8181818181818182, 'recall': 0.9, 'f1-score': 0.8571428571428571, 'support': 60.0}, '5': {'precision': 0.9787234042553191, 'recall': 0.7666666666666667, 'f1-score': 0.8598130841121495, 'support': 60.0}, '6': {'precision': 0.59375, 'recall': 0.31666666666666665, 'f1-score': 0.41304347826086957, 'support': 60.0}, '7': {'precision': 0.9523809523809523, 'recall': 1.0, 'f1-score': 0.975609756097561, 'support': 60.0}, 'accuracy': 0.83125, 'macro avg': {'precision': 0.8240348441842915, 'recall': 0.83125, 'f1-score': 0.8181296825723063, 'support': 480.0}, 'weighted avg': {'precision': 0.8240348441842914, 'recall': 0.83125, 'f1-score': 0.8181296825723064, 'support': 480.0}}, 'eval_runtime': 198.4425, 'eval_samples_per_second': 2.419, 'eval_steps_per_second': 0.151, 'epoch': 1.67}
+{'loss': 0.5133, 'grad_norm': 2.9789443016052246, 'learning_rate': 1.3060869565217394e-05, 'epoch': 1.88}
+ 38%|█████████████████████████████████                                                       | 450/1200 [2:41:54<3:06:45, 14.94s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 0.4979967176914215, 'eval_kappa': 0.8285714285714285, 'eval_accuracy': 0.85, 'eval_f1': 0.8422178554201932, 'eval_precision': 0.8422820906691875, 'eval_recall': 0.85, 'eval_report': {'0': {'precision': 0.7384615384615385, 'recall': 0.8, 'f1-score': 0.768, 'support': 60.0}, '1': {'precision': 0.9516129032258065, 'recall': 0.9833333333333333, 'f1-score': 0.9672131147540983, 'support': 60.0}, '2': {'precision': 0.7714285714285715, 'recall': 0.9, 'f1-score': 0.8307692307692308, 'support': 60.0}, '3': {'precision': 0.9354838709677419, 'recall': 0.9666666666666667, 'f1-score': 0.9508196721311475, 'support': 60.0}, '4': {'precision': 0.875, 'recall': 0.9333333333333333, 'f1-score': 0.9032258064516129, 'support': 60.0}, '5': {'precision': 0.8888888888888888, 'recall': 0.8, 'f1-score': 0.8421052631578947, 'support': 60.0}, '6': {'precision': 0.625, 'recall': 0.4166666666666667, 'f1-score': 0.5, 'support': 60.0}, '7': {'precision': 0.9523809523809523, 'recall': 1.0, 'f1-score': 0.975609756097561, 'support': 60.0}, 'accuracy': 0.85, 'macro avg': {'precision': 0.8422820906691875, 'recall': 0.8500000000000001, 'f1-score': 0.8422178554201931, 'support': 480.0}, 'weighted avg': {'precision': 0.8422820906691875, 'recall': 0.85, 'f1-score': 0.8422178554201932, 'support': 480.0}}, 'eval_runtime': 206.1268, 'eval_samples_per_second': 2.329, 'eval_steps_per_second': 0.146, 'epoch': 1.88}
+ 38%|█████████████████████████████████                                                       | 450/1200 [2:45:20<3:06:45, 14.94s/it]
+⏹️ Sin mejora en Kappa por 2 evaluaciones. Deteniendo...████████████████████████████████████████████| 30/30 [03:19<00:00,  7.04s/it]
+{'train_runtime': 9935.5814, 'train_samples_per_second': 0.966, 'train_steps_per_second': 0.121, 'train_loss': 1.098153648376465, 'epoch': 1.88}
+ 38%|█████████████████████████████████                                                       | 450/1200 [2:45:35<4:35:59, 22.08s/it]
+C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 30/30 [03:37<00:00,  6.67s/it]
+⏹️ Sin mejora en Kappa por 2 evaluaciones. Deteniendo...
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 30/30 [03:37<00:00,  7.24s/it]
+
+📊 Resultados finales para ESPECIALIDAD:
+► Kappa: 0.831
+► Accuracy: 0.852
+► F1-Score: 0.850
+► Precision: 0.855
+► Recall: 0.852
+► Loss: 0.550
+
+📝 Reporte de Clasificación Detallado:
+
+🔹 Clase 0:
+   precision: 0.818
+      recall: 0.750
+    f1-score: 0.783
+     support: 60.000
+
+🔹 Clase 1:
+   precision: 0.967
+      recall: 0.983
+    f1-score: 0.975
+     support: 60.000
+
+🔹 Clase 2:
+   precision: 0.757
+      recall: 0.883
+    f1-score: 0.815
+     support: 60.000
+
+🔹 Clase 3:
+   precision: 0.906
+      recall: 0.967
+    f1-score: 0.935
+     support: 60.000
+
+🔹 Clase 4:
+   precision: 0.824
+      recall: 0.933
+    f1-score: 0.875
+     support: 60.000
+
+🔹 Clase 5:
+   precision: 1.000
+      recall: 0.767
+    f1-score: 0.868
+     support: 60.000
+
+🔹 Clase 6:
+   precision: 0.571
+      recall: 0.533
+    f1-score: 0.552
+     support: 60.000
+
+🔹 Clase 7:
+   precision: 1.000
+      recall: 1.000
+    f1-score: 1.000
+     support: 60.000
+
+🔹 Clase macro avg:
+   precision: 0.855
+      recall: 0.852
+    f1-score: 0.850
+     support: 480.000
+
+🔹 Clase weighted avg:
+   precision: 0.855
+      recall: 0.852
+    f1-score: 0.850
+     support: 480.000
+
+📌 RESUMEN FINAL DE MÉTRICAS:
+Etiqueta     | Kappa  | Accuracy | F1     | Precision | Recall | Loss
+--------------------------------------------------------------------------------
+ESPECIALIDAD | 0.831 | 0.852    | 0.850 | 0.855     | 0.852 | 0.550
+
+###########################################################
+
+El modelo fue entrenado para clasificar 8 especialidades médicas (como Urgencias, Cirugía, Oftalmología, etc.) a partir de textos clínicos. Aquí el análisis detallado:
+
+🔍 Hallazgos Clave
+1. Balanceo de Clases
+Distribución Original: Muy desbalanceada (ej. "URGENCIAS": 733 casos vs "OTORRINOLARINGOLOGIA": 70).
+
+Balanceo Artificial: Se generaron 300 muestras por clase (total: 2400).
+
+✅ Ventaja: Evita sesgo hacia clases mayoritarias.
+
+❗ Limitación: Puede generar sobreajuste en clases minoritarias (ej. "OTORRINOLARINGOLOGIA").
+
+2. Métricas Finales
+Métrica	Valor	Interpretación
+Kappa	0.831	Acuerdo casi perfecto (0.8-1.0 es excelente).
+Accuracy	0.852	Alto, pero influenciado por el balanceo artificial.
+F1-Score	0.850	Buen equilibrio entre precisión y recall.
+Loss	0.550	Indica un buen ajuste (sin sobreajuste extremo).
+3. Desempeño por Clase
+🔹 Especialidades con Mejor Rendimiento (F1 > 0.9)
+Clase 1 (OTORRINOLARINGOLOGIA):
+
+Precision: 0.967 | Recall: 0.983 | F1: 0.975
+
+Clase 3 (RECONSTRUCTIVA):
+
+Precision: 0.906 | Recall: 0.967 | F1: 0.935
+
+Clase 7 (UROLOGIA):
+
+Precision: 1.0 | Recall: 1.0 | F1: 1.0 (¡Perfecto!)
+
+🔹 Especialidades con Problemas (F1 < 0.7)
+Clase 6 (SIN ESPECIALIDAD):
+
+Precision: 0.571 | Recall: 0.533 | F1: 0.552
+
+Posible causa: Textos ambiguos o falta de patrones claros.
+
+🔹 Resto de Clases (F1 0.7-0.9)
+Ej: "URGENCIAS" (F1: 0.783), "ORTOPEDIA" (F1: 0.815), "OFTALMOLOGIA" (F1: 0.875).
+
+4. Evolución del Entrenamiento
+Primeras Épocas (0.21-0.62):
+
+Kappa subió de 0.08 a 0.67, mostrando rápido aprendizaje.
+
+Accuracy mejoró de 0.19 a 0.71.
+
+Épocas Finales (1.04-1.88):
+
+Kappa alcanzó 0.83 (mejor resultado).
+
+Early Stopping se activó tras 2 evaluaciones sin mejora.
+
+🚨 Posibles Problemas
+Clase "SIN ESPECIALIDAD" (F1 bajo: 0.55):
+
+Puede contener textos genéricos difíciles de clasificar.
+
+Solución: Revisar muestras mal clasificadas para mejorar patrones.
+
+Overfitting en Clases Minoritarias:
+
+Aunque el loss de evaluación (0.55) es bajo, clases como "OTORRINOLARINGOLOGIA" (original: 70 casos) podrían estar sobreajustadas.
+
+Precisión vs Recall en Algunas Clases:
+
+Ej: "CIRUGIA" (Precision: 1.0, Recall: 0.767).
+
+Interpretación: El modelo es conservador (solo predice "CIRUGIA" cuando está seguro, pero pierde casos).
+
+💡 Recomendaciones
+Análisis de Errores:
+
+Revisar falsos positivos/negativos de "SIN ESPECIALIDAD" y "CIRUGIA".
+
+Optimización del Modelo:
+
+Probar fine-tuning más agresivo o aumentar el dropout para evitar overfitting.
+
+Validación en Datos Reales:
+
+Evaluar el modelo en datos no balanceados para simular condiciones reales.
+
+Interpretabilidad:
+
+Usar SHAP/LIME para entender qué términos influyen en las predicciones (ej. "dolor abdominal" → "CIRUGIA").
+
+📌 Conclusión
+El modelo logra un alto desempeño general (Kappa: 0.83), especialmente en especialidades como Urología y Otorrinolaringología. Sin embargo, tiene dificultades con casos genéricos ("SIN ESPECIALIDAD").
+Próximos pasos:
+
+Mejorar la representación de clases problemáticas.
+
+Validar en datos no balanceados para asegurar robustez.

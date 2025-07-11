@@ -1,0 +1,203 @@
+(venv) PS C:\Users\xiute\Desktop\TriageIA> python berttrainer.py
+🔼 Selecciona el archivo CSV con tus datos
+✅ Archivo cargado: C:/Users/xiute/Desktop/TriageIA/db.csv
+
+📊 Distribución inicial de clases:
+PRIORIDAD: {'IV': 234, 'III': 1482, 'II': 226, 'I': 75}
+DERIVACION: {'ALTA': 234, 'CONSULTA DE': 1708, 'INGRESA A': 75}
+ESPECIALIDAD: {'SIN ESPECIALIDAD': 229, 'OTORRINOLARINGOLOGIA': 70, 'URGENCIAS': 733, 'ORTOPEDIA': 275, 'OFTALMOLOGIA': 118, 'CIRUGIA': 396, 'RECONSTRUCTIVA': 118, 'UROLOGIA': 78}
+IDX: {'INFECCION DE TEJIDOS BLANDOS': 33, 'SINTOMAS NEUROLOGICOS AGUDOS': 91, 'HEMORRAGIA DIGESTIVA': 45, 'FRACTURAS, ESGUINCES Y OTROS SINTOMAS DEL SISTEMA OSTEOMUSCULAR': 278, 'DESEQUILIBROS HIDROELECTROLITICOS': 30, 'CONJUNTIVITIS, TRAUMA OCULAR Y OTRAS PATOLOGIAS DEL OJO Y SUS ANEXOS': 124, 'EVENTO VASCULAR CEREBRAL': 9, 'DOLOR ABDOMINAL': 381, 'FRACTURA NASAL Y EPISTAXIS': 26, 'TRAUMATISMO Y HERIDAS EN MANO': 92, 'INFECCION DE VIAS URINARIAS': 60, 'LITIASIS URINARIA, RETENCION AGUDA DE ORINA Y OTRAS PATOLOGIAS UROLOGICAS': 104, 'FIEBRE EN ESTUDIO': 9, 'HEMATURIA': 15, 'NEUMONIA': 22, 'HIPERTENSION DESCONTROLADA': 34, 'DIARREA Y GASTROENTERITIS': 35, 'DIABETES MELLITUS DESCOMPENSADA': 77, 'TRAUMATISMO CRANEOENCEFALICO': 41, 'INSUFICIENCIA HEPATICA': 16, 'OTROS': 120, 'POLICONTUNDIDO': 97, 'ANEMIA': 6, 'TROMBOSIS': 16, 'ABSCESO ANAL Y HEMORROIDES': 26, 'OTRAS PATOLOGIAS DE OIDO, NARIZ, BOCA Y CUELLO': 22, 'INFECCION RESPIRATORIA ALTA': 18, 'INSUFICIENCIA RESPIRATORIA': 16, 'OTITIS': 15, 'DOLOR PRECORDIAL': 49, 'CHOQUE': 16, 'VERTIGO': 13, 'INSUFICIENCIA RENAL': 16, 'HERIDA EN ROSTRO': 22, 'INTOXICACION': 18, 'INSUFICIENCIA CARDIACA': 6, 'HERIDA CON ARMA': 12, 'ARRITMIA': 2, 'QUEMADURA': 5}
+
+============================================================
+🔧 ENTRENANDO MODELO PARA: DERIVACION
+============================================================
+
+🚀 Iniciando entrenamiento para DERIVACION
+
+⚖️ Balanceando clases para DERIVACION...
+Distribución original: Counter({'CONSULTA DE': 1708, 'ALTA': 234, 'INGRESA A': 75})
+Nueva distribución (900 muestras): Counter({'ALTA': 300, 'CONSULTA DE': 300, 'INGRESA A': 300})
+Some weights of RobertaForSequenceClassification were not initialized from the model checkpoint at PlanTL-GOB-ES/bsc-bio-ehr-es and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+
+⏳ Iniciando entrenamiento...
+  0%|                                                                                                       | 0/450 [00:00<?, ?it/s]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 1.0669, 'grad_norm': 4.796038627624512, 'learning_rate': 1.9600000000000002e-05, 'epoch': 0.56}
+{'eval_loss': 0.9064143896102905, 'eval_kappa': 0.5083333333333333, 'eval_accuracy': 0.6722222222222223, 'eval_f1': 0.6628041465605818, 'eval_precision': 0.7440466089710955, 'eval_recall': 0.6722222222222223, 'eval_report': {'0': {'precision': 0.6265060240963856, 'recall': 0.8666666666666667, 'f1-score': 0.7272727272727273, 'support': 60.0}, '1': {'precision': 0.6056338028169014, 'recall': 0.7166666666666667, 'f1-score': 0.6564885496183206, 'support': 60.0}, '2': {'precision': 1.0, 'recall': 0.43333333333333335, 'f1-score': 0.6046511627906976, 'support': 60.0}, 'accuracy': 0.6722222222222223, 'macro avg': {'precision': 0.7440466089710956, 'recall': 0.6722222222222222, 'f1-score': 0.6628041465605818, 'support': 180.0}, 'weighted avg': {'precision': 0.7440466089710955, 'recall': 0.6722222222222223, 'f1-score': 0.6628041465605818, 'support': 180.0}}, 'eval_runtime': 79.8434, 'eval_samples_per_second': 2.254, 'eval_steps_per_second': 0.15, 'epoch': 0.56}
+ 20%|██████████████████▍                                                                         | 90/450 [29:06<1:35:10, 15.86s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 0.7273, 'grad_norm': 16.741668701171875, 'learning_rate': 1.755e-05, 'epoch': 1.11}
+{'eval_loss': 0.3919523358345032, 'eval_kappa': 0.8083333333333333, 'eval_accuracy': 0.8722222222222222, 'eval_f1': 0.8729970120214023, 'eval_precision': 0.8744917850181008, 'eval_recall': 0.8722222222222222, 'eval_report': {'0': {'precision': 0.9298245614035088, 'recall': 0.8833333333333333, 'f1-score': 0.905982905982906, 'support': 60.0}, '1': {'precision': 0.7936507936507936, 'recall': 0.8333333333333334, 'f1-score': 0.8130081300813008, 'support': 60.0}, '2': {'precision': 0.9, 'recall': 0.9, 'f1-score': 0.9, 'support': 60.0}, 'accuracy': 0.8722222222222222, 'macro avg': {'precision': 0.8744917850181008, 'recall': 0.8722222222222222, 'f1-score': 0.8729970120214022, 'support': 180.0}, 'weighted avg': {'precision': 0.8744917850181008, 'recall': 0.8722222222222222, 'f1-score': 0.8729970120214023, 'support': 180.0}}, 'eval_runtime': 80.5488, 'eval_samples_per_second': 2.235, 'eval_steps_per_second': 0.149, 'epoch': 1.11}
+{'loss': 0.3865, 'grad_norm': 5.9715576171875, 'learning_rate': 1.505e-05, 'epoch': 1.67}
+ 33%|██████████████████████████████▎                                                            | 150/450 [47:31<1:20:24, 16.08s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 0.2625466287136078, 'eval_kappa': 0.875, 'eval_accuracy': 0.9166666666666666, 'eval_f1': 0.9170818062267044, 'eval_precision': 0.9278560250391236, 'eval_recall': 0.9166666666666666, 'eval_report': {'0': {'precision': 1.0, 'recall': 0.8166666666666667, 'f1-score': 0.8990825688073395, 'support': 60.0}, '1': {'precision': 0.8169014084507042, 'recall': 0.9666666666666667, 'f1-score': 0.8854961832061069, 'support': 60.0}, '2': {'precision': 0.9666666666666667, 'recall': 0.9666666666666667, 'f1-score': 0.9666666666666667, 'support': 60.0}, 'accuracy': 0.9166666666666666, 'macro avg': {'precision': 0.9278560250391236, 'recall': 0.9166666666666666, 'f1-score': 0.9170818062267044, 'support': 180.0}, 'weighted avg': {'precision': 0.9278560250391236, 'recall': 0.9166666666666666, 'f1-score': 0.9170818062267044, 'support': 180.0}}, 'eval_runtime': 82.7823, 'eval_samples_per_second': 2.174, 'eval_steps_per_second': 0.145, 'epoch': 1.67}
+ 40%|████████████████████████████████████▍                                                      | 180/450 [59:07<1:12:29, 16.11s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 0.302, 'grad_norm': 11.669885635375977, 'learning_rate': 1.255e-05, 'epoch': 2.22}
+{'eval_loss': 0.23526695370674133, 'eval_kappa': 0.8666666666666667, 'eval_accuracy': 0.9111111111111111, 'eval_f1': 0.9120879120879121, 'eval_precision': 0.915204678362573, 'eval_recall': 0.9111111111111111, 'eval_report': {'0': {'precision': 0.9473684210526315, 'recall': 0.9, 'f1-score': 0.9230769230769231, 'support': 60.0}, '1': {'precision': 0.8333333333333334, 'recall': 0.9166666666666666, 'f1-score': 0.873015873015873, 'support': 60.0}, '2': {'precision': 0.9649122807017544, 'recall': 0.9166666666666666, 'f1-score': 0.9401709401709402, 'support': 60.0}, 'accuracy': 0.9111111111111111, 'macro avg': {'precision': 0.915204678362573, 'recall': 0.9111111111111111, 'f1-score': 0.9120879120879121, 'support': 180.0}, 'weighted avg': {'precision': 0.915204678362573, 'recall': 0.9111111111111111, 'f1-score': 0.9120879120879121, 'support': 180.0}}, 'eval_runtime': 80.1616, 'eval_samples_per_second': 2.245, 'eval_steps_per_second': 0.15, 'epoch': 2.22}
+{'loss': 0.1772, 'grad_norm': 1.4002052545547485, 'learning_rate': 1.005e-05, 'epoch': 2.78}
+ 56%|██████████████████████████████████████████████████▌                                        | 250/450 [1:20:36<51:45, 15.53s/it]C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'eval_loss': 0.16780681908130646, 'eval_kappa': 0.9166666666666666, 'eval_accuracy': 0.9444444444444444, 'eval_f1': 0.9442576592551385, 'eval_precision': 0.945808313550249, 'eval_recall': 0.9444444444444444, 'eval_report': {'0': {'precision': 0.9818181818181818, 'recall': 0.9, 'f1-score': 0.9391304347826087, 'support': 60.0}, '1': {'precision': 0.9032258064516129, 'recall': 0.9333333333333333, 'f1-score': 0.9180327868852459, 'support': 60.0}, '2': {'precision': 0.9523809523809523, 'recall': 1.0, 'f1-score': 0.975609756097561, 'support': 60.0}, 'accuracy': 0.9444444444444444, 'macro avg': {'precision': 0.945808313550249, 'recall': 0.9444444444444445, 'f1-score': 0.9442576592551385, 'support': 180.0}, 'weighted avg': {'precision': 0.945808313550249, 'recall': 0.9444444444444444, 'f1-score': 0.9442576592551385, 'support': 180.0}}, 'eval_runtime': 80.75, 'eval_samples_per_second': 2.229, 'eval_steps_per_second': 0.149, 'epoch': 2.78}
+ 56%|██████████████████████████████████████████████████▌                                        | 250/450 [1:21:57<51:45, 15.53s/it]
+🎯 Kappa alcanzado 0.917 >= 0.9. Deteniendo...██████████████████████████████████████████████████████| 12/12 [01:13<00:00,  5.40s/it]
+{'train_runtime': 4930.2201, 'train_samples_per_second': 0.73, 'train_steps_per_second': 0.091, 'train_loss': 0.5319930877685547, 'epoch': 2.78}
+ 56%|█████████████████████████████████████████████████▍                                       | 250/450 [1:22:10<1:05:44, 19.72s/it]
+C:\Users\xiute\Desktop\TriageIA\venv\lib\site-packages\torch\utils\data\dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [01:17<00:00,  5.48s/it]
+🎯 Kappa alcanzado 0.917 >= 0.9. Deteniendo...
+100%|███████████████████████████████████████████████████████████████████████████████████████████████| 12/12 [01:17<00:00,  6.42s/it]
+
+📊 Resultados finales para DERIVACION:
+► Kappa: 0.917
+► Accuracy: 0.944
+► F1-Score: 0.944
+► Precision: 0.946
+► Recall: 0.944
+► Loss: 0.168
+
+📝 Reporte de Clasificación Detallado:
+
+🔹 Clase 0:
+   precision: 0.982
+      recall: 0.900
+    f1-score: 0.939
+     support: 60.000
+
+🔹 Clase 1:
+   precision: 0.903
+      recall: 0.933
+    f1-score: 0.918
+     support: 60.000
+
+🔹 Clase 2:
+   precision: 0.952
+      recall: 1.000
+    f1-score: 0.976
+     support: 60.000
+
+🔹 Clase macro avg:
+   precision: 0.946
+      recall: 0.944
+    f1-score: 0.944
+     support: 180.000
+
+🔹 Clase weighted avg:
+   precision: 0.946
+      recall: 0.944
+    f1-score: 0.944
+     support: 180.000
+
+📌 RESUMEN FINAL DE MÉTRICAS:
+Etiqueta     | Kappa  | Accuracy | F1     | Precision | Recall | Loss
+--------------------------------------------------------------------------------
+DERIVACION   | 0.917 | 0.944    | 0.944 | 0.946     | 0.944 | 0.168
+
+###########################################################
+
+Este modelo fue entrenado para clasificar 3 categorías de derivación médica (ALTA, CONSULTA DE, INGRESA A) a partir de textos clínicos. A continuación, un análisis detallado:
+
+📌 Hallazgos Clave
+1. Balanceo de Clases
+Distribución Original:
+
+Muy desbalanceada:
+
+CONSULTA DE: 1708 casos (mayoritaria).
+
+ALTA: 234 casos.
+
+INGRESA A: 75 casos (muy minoritaria).
+
+Balanceo Artificial:
+
+Se generaron 300 muestras por clase (total: 900).
+
+✅ Ventaja: Evita sesgo hacia la clase mayoritaria (CONSULTA DE).
+
+❗ Limitación: Puede generar sobreajuste en INGRESA A (originalmente solo 75 casos).
+
+2. Métricas Finales (Excelentes)
+Métrica	Valor	Interpretación
+Kappa	0.917	Acuerdo casi perfecto (0.8-1.0 es excelente).
+Accuracy	0.944	Muy alto, pero influenciado por el balanceo artificial.
+F1-Score	0.944	Excelente equilibrio entre precisión y recall.
+Loss	0.168	Muy bajo, indica un ajuste casi perfecto.
+3. Desempeño por Clase
+🔹 Clase 2 (INGRESA A) → Mejor Rendimiento
+Precision: 0.952 | Recall: 1.0 | F1: 0.976
+
+El modelo identifica perfectamente los casos que requieren ingreso (ningún falso negativo).
+
+Solo un 4.8% de falsos positivos (alta precisión).
+
+🔹 Clase 0 (ALTA) → Buen Rendimiento
+Precision: 0.982 | Recall: 0.9 | F1: 0.939
+
+Casi perfecto en precisión (solo 1.8% de falsos positivos).
+
+Recall del 90% (10% de altas médicas no detectadas).
+
+🔹 Clase 1 (CONSULTA DE) → Peor de las 3 (aún buena)
+Precision: 0.903 | Recall: 0.933 | F1: 0.918
+
+Pequeña confusión con otras clases (9.7% de falsos positivos).
+
+Buen recall (93.3% de los casos de consulta son detectados).
+
+4. Evolución del Entrenamiento
+Primeras Épocas (0.56-1.11):
+
+Kappa subió de 0.51 a 0.81 (rápido aprendizaje).
+
+Accuracy mejoró de 0.67 a 0.87.
+
+Épocas Finales (1.67-2.78):
+
+Kappa alcanzó 0.917 (casi perfecto).
+
+Early Stopping: Se detuvo al superar Kappa ≥ 0.9.
+
+🚨 Posibles Problemas
+Posible Sobreajuste en INGRESA A
+
+Originalmente solo tenía 75 casos, pero se aumentó a 300.
+
+El modelo podría estar sobreoptimizado para esta clase.
+
+Solución: Validar con datos reales no balanceados.
+
+Confusión entre ALTA y CONSULTA DE
+
+Aunque el F1 es alto (0.918), hay un 6.7% de falsos negativos en CONSULTA DE.
+
+Causa posible: Textos similares en ambas categorías.
+
+💡 Recomendaciones
+Validación en Datos Reales
+
+Evaluar el modelo en datos no balanceados para ver su desempeño real.
+
+Análisis de Errores
+
+Revisar los falsos negativos en CONSULTA DE y ALTA.
+
+¿Hay patrones confusos? (Ej: "Alta con seguimiento" vs "Consulta de control").
+
+Optimización Adicional (Opcional)
+
+Probar fine-tuning más agresivo si se quiere mejorar el recall en CONSULTA DE.
+
+📌 Conclusión
+Excelente modelo (Kappa 0.917, F1 0.944).
+
+Clase INGRESA A es la mejor identificada (F1 0.976).
+
+CONSULTA DE tiene un pequeño margen de mejora (F1 0.918).
+
+Próximo paso: Validar en datos reales no balanceados.
+
+¿Necesitas profundizar en algún aspecto? 🚀

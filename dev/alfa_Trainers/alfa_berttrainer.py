@@ -72,7 +72,7 @@ def cargar_datos():
     root.withdraw()
     file_path = filedialog.askopenfilename(title="Selecciona el archivo CSV", filetypes=[("CSV Files", "*.csv")])
 
-    columnas_necesarias = ["MOTIVO", "EDAD", "GENERO", "FC", "FR", "TAS", "TAD", "SAO2", "TEMP", "NEWS2",
+    columnas_necesarias = ["MOTIVO", "EDAD", "GENERO", "FC", "FR", "TAS", "SAO2", "TEMP", "NEWS2",
                           "PRIORIDAD", "IDX", "DERIVACION", "ESPECIALIDAD"]
 
     df = pd.read_csv(file_path, usecols=columnas_necesarias)
@@ -91,7 +91,7 @@ def cargar_datos():
 # =============================
 def preprocesar_datos(df):
     # Limpieza manteniendo tus reglas originales
-    df = df.dropna(subset=["MOTIVO", "EDAD", "GENERO", "FC", "FR", "TAS", "TAD", "SAO2", "TEMP", "NEWS2"])
+    df = df.dropna(subset=["MOTIVO", "EDAD", "GENERO", "FC", "FR", "TAS", "SAO2", "TEMP", "NEWS2"])
 
     # Optimizar tipos de datos
     tipos_optimizados = {
@@ -99,7 +99,6 @@ def preprocesar_datos(df):
         'FC': 'int16',
         'FR': 'int8',
         'TAS': 'int16',
-        'TAD': 'int8',
         'SAO2': 'int8',
         'TEMP': 'float32',
         'NEWS2': 'int8'
@@ -109,7 +108,7 @@ def preprocesar_datos(df):
     # Texto de entrada modificado: datos estructurados primero, motivo al final
     df["input_text"] = df.apply(lambda x:
         f"[EDAD] {x['EDAD']} [GENERO] {x['GENERO']} [FC] {x['FC']} [FR] {x['FR']} "
-        f"[TAS] {x['TAS']} [TAD] {x['TAD']} [SAO2] {x['SAO2']} [TEMP] {x['TEMP']} [NEWS2] {x['NEWS2']} "
+        f"[TAS] {x['TAS']} [SAO2] {x['SAO2']} [TEMP] {x['TEMP']} [NEWS2] {x['NEWS2']} "
         f"[MOTIVO] {x['MOTIVO']}", axis=1)
 
     return df
@@ -117,7 +116,7 @@ def preprocesar_datos(df):
 # =============================
 # 5. BALANCEO INTELIGENTE DE CLASES (VERSIÓN OPTIMIZADA)
 # =============================
-def balancear_clases(df, etiqueta, target_samples=146):
+def balancear_clases(df, etiqueta, target_samples=300):
     print(f"\n⚖️ Balanceando clases para {etiqueta}...")
     counter = Counter(df[etiqueta])
     print(f"Distribución original: {counter}")
@@ -148,86 +147,72 @@ def balancear_clases(df, etiqueta, target_samples=146):
     return df_balanced
 
 # =============================
-# 6. FUNCIÓN DE ENTRENAMIENTO PARA T5 (NUEVA VERSIÓN)
+# 6. FUNCIÓN DE ENTRENAMIENTO OPTIMIZADA (CORREGIDA)
 # =============================
-def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
-    print(f"\n🚀 Iniciando entrenamiento para {etiqueta} con T5")
+def entrenar_modelo(df, etiqueta, nombre_modelo):
+    print(f"\n🚀 Iniciando entrenamiento para {etiqueta}")
 
-    # 1. Balancear datos
-    df_balanced = balancear_clases(df, etiqueta, target_samples=146)
+    # 1. Balancear datos con método más rápido
+    df_balanced = balancear_clases(df, etiqueta, target_samples=300)
 
     # 2. Dividir datos
     train_df, test_df = train_test_split(
-        df_balanced[["input_text", "label_text"]],  # Usamos label_text en lugar de label numérico
+        df_balanced[["input_text", "label"]],
         test_size=0.2,
         random_state=42,
         stratify=df_balanced["label"]
     )
 
-    # 3. Cargar modelo y tokenizer de T5
-    model_name = "t5-small"  # Puedes usar "t5-base" para mejor rendimiento si tienes recursos
+    # 3. Cargar modelo ClinicalBERT
+    model_name = "emilyalsentzer/Bio_ClinicalBERT"
     tokenizer = AutoTokenizer.from_pretrained(model_name)
 
-    # Convertir a formato text-to-text
-    train_df['input'] = "clasificar: " + train_df['input_text']
-    train_df['target'] = train_df['label_text']
-    test_df['input'] = "clasificar: " + test_df['input_text']
-    test_df['target'] = test_df['label_text']
+    # Obtener el número de clases únicas
+    num_labels = len(df_balanced['label'].unique())
 
-    # 4. Preparar datasets
+    model = AutoModelForSequenceClassification.from_pretrained(
+        model_name,
+        num_labels=num_labels,
+        ignore_mismatched_sizes=True
+    )
+
+    # 4. Preparar datasets optimizados
     def tokenize_function(examples):
-        model_inputs = tokenizer(
-            examples["input"],
+        return tokenizer(
+            examples["input_text"],
             max_length=256,
             padding="max_length",
             truncation=True,
             return_tensors="pt"
         )
 
-        # Tokenizar targets
-        with tokenizer.as_target_tokenizer():
-            labels = tokenizer(
-                examples["target"],
-                max_length=32,  # Más corto para las etiquetas
-                padding="max_length",
-                truncation=True,
-                return_tensors="pt"
-            )
-
-        model_inputs["labels"] = labels["input_ids"]
-        return model_inputs
-
+    # Configuración optimizada para datasets
     train_ds = Dataset.from_pandas(train_df).map(
         tokenize_function,
         batched=True,
         batch_size=32,
-        remove_columns=['input_text', 'label_text', 'input', 'target']
+        remove_columns=['input_text']
     )
-
     test_ds = Dataset.from_pandas(test_df).map(
         tokenize_function,
         batched=True,
         batch_size=32,
-        remove_columns=['input_text', 'label_text', 'input', 'target']
+        remove_columns=['input_text']
     )
 
-    # 5. Cargar modelo T5 para sequence-to-sequence
-    from transformers import T5ForConditionalGeneration
-    model = T5ForConditionalGeneration.from_pretrained(model_name)
-
-    # 6. Configuración de entrenamiento (ajustada para T5)
+    # 5. Configuración de entrenamiento optimizada (PARÁMETROS ACTUALIZADOS)
     args = TrainingArguments(
         output_dir=f"./{nombre_modelo}_results",
         eval_strategy="steps",  # Cambiado de evaluation_strategy
-        eval_steps=150,
+        eval_steps=50,
         save_strategy="steps",  # Cambiado de save_strategy
-        save_steps=150,
-        learning_rate=2e-5,
+        save_steps=50,
+        learning_rate=3e-5,
         per_device_train_batch_size=16 if torch.cuda.is_available() else 8,
         per_device_eval_batch_size=32 if torch.cuda.is_available() else 16,
         num_train_epochs=5,
         weight_decay=0.01,
-        warmup_steps=150,
+        warmup_steps=50,
         logging_dir=f"./{nombre_modelo}_logs",
         load_best_model_at_end=True,
         metric_for_best_model="eval_kappa",
@@ -235,45 +220,31 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
         fp16=torch.cuda.is_available(),
         report_to="none",
         optim="adamw_torch",
-        logging_steps=150,
+        logging_steps=50,
         dataloader_num_workers=4 if torch.cuda.is_available() else 0,
         gradient_accumulation_steps=2 if torch.cuda.is_available() else 1,
         seed=42
     )
 
-    # 7. Función para calcular métricas extendidas (adaptada para T5)
+    # 6. Función para calcular métricas extendidas
     def compute_metrics(eval_pred):
-        preds, labels = eval_pred
-        if isinstance(preds, tuple):
-            preds = preds[0]  # Tomar solo las predicciones si vienen en una tupla
+        logits, labels = eval_pred
+        predictions = np.argmax(logits, axis=-1)
 
-        # Decodificar predicciones (asegurarse de que son tensores)
-        if isinstance(preds, np.ndarray):
-            preds = torch.from_numpy(preds)
+        # Calcular todas las métricas
+        kappa = cohen_kappa_score(labels, predictions)
+        accuracy = accuracy_score(labels, predictions)
 
-        decoded_preds = tokenizer.batch_decode(preds.argmax(dim=-1), skip_special_tokens=True)
+        # Para métricas que necesitan average (manejar multi-clase)
+        average_type = 'weighted'  # Cambiado a weighted para considerar balance de clases
+        f1 = f1_score(labels, predictions, average=average_type)
+        precision = precision_score(labels, predictions, average=average_type)
+        recall = recall_score(labels, predictions, average=average_type)
 
-        # Reemplazar -100 en labels (ignorados por la loss)
-        labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
-        decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
-
-        # Convertir a numéricos para métricas
-        unique_labels = sorted(df[etiqueta].unique())
-        label_to_id = {label: idx for idx, label in enumerate(unique_labels)}
-
-        preds_numeric = [label_to_id.get(pred.strip(), 0) for pred in decoded_preds]
-        labels_numeric = [label_to_id.get(label.strip(), 0) for label in decoded_labels]
-
-        # Calcular métricas
-        kappa = cohen_kappa_score(labels_numeric, preds_numeric)
-        accuracy = accuracy_score(labels_numeric, preds_numeric)
-        f1 = f1_score(labels_numeric, preds_numeric, average='weighted')
-        precision = precision_score(labels_numeric, preds_numeric, average='weighted')
-        recall = recall_score(labels_numeric, preds_numeric, average='weighted')
-
+        # Reporte de clasificación completo
         report = classification_report(
-            labels_numeric,
-            preds_numeric,
+            labels,
+            predictions,
             output_dict=True,
             zero_division=0
         )
@@ -287,7 +258,7 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
             "report": report
         }
 
-    # 8. Entrenamiento con callbacks
+    # 7. Entrenamiento con callbacks
     trainer = Trainer(
         model=model,
         args=args,
@@ -295,16 +266,16 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
         eval_dataset=test_ds,
         compute_metrics=compute_metrics,
         callbacks=[
-            KappaEarlyStopping(threshold=0.7, patience=2),  # Umbral más bajo para IDX
+            KappaEarlyStopping(threshold=0.9, patience=2),
             EarlyStoppingCallback(early_stopping_patience=3)
         ]
     )
 
-    # 9. Entrenar
-    print("\n⏳ Iniciando entrenamiento con T5...")
+    # 8. Entrenar
+    print("\n⏳ Iniciando entrenamiento...")
     trainer.train()
 
-    # 10. Evaluación final
+    # 9. Evaluación final
     eval_results = trainer.evaluate()
     print(f"\n📊 Resultados finales para {etiqueta}:")
     print(f"► Kappa: {eval_results['eval_kappa']:.3f}")
@@ -314,7 +285,7 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
     print(f"► Recall: {eval_results['eval_recall']:.3f}")
     print(f"► Loss: {eval_results['eval_loss']:.3f}")
 
-    # Mostrar reporte de clasificación
+    # Mostrar reporte de clasificación completo
     print("\n📝 Reporte de Clasificación Detallado:")
     report = eval_results['eval_report']
     if isinstance(report, dict):
@@ -324,7 +295,7 @@ def entrenar_modelo_t5(df, etiqueta, nombre_modelo):
                 for k, v in metrics.items():
                     print(f"{k:>12}: {v:.3f}" if isinstance(v, (int, float)) else f"{k:>12}: {v}")
 
-    # 11. Guardar modelo
+    # 10. Guardar modelo y mapeo de etiquetas
     os.makedirs(nombre_modelo, exist_ok=True)
     trainer.save_model(f"./{nombre_modelo}")
     tokenizer.save_pretrained(f"./{nombre_modelo}")
@@ -358,10 +329,10 @@ if __name__ == "__main__":
 
         # Configuración de modelos
         config_modelos = [
-            #{"etiqueta": "PRIORIDAD", "nombre_modelo": "modelo_t5_prioridad"},
-            {"etiqueta": "IDX", "nombre_modelo": "modelo_t5_idx"},
-            #{"etiqueta": "DERIVACION", "nombre_modelo": "modelo_t5_derivacion"},
-            #{"etiqueta": "ESPECIALIDAD", "nombre_modelo": "modelo_t5_especialidad"}
+            {"etiqueta": "PRIORIDAD", "nombre_modelo": "modelo_cb_prioridad"},
+            #{"etiqueta": "IDX", "nombre_modelo": "modelo_cb_idx"},
+            #{"etiqueta": "DERIVACION", "nombre_modelo": "modelo_cb_derivacion"},
+            #{"etiqueta": "ESPECIALIDAD", "nombre_modelo": "modelo_cb_especialidad"}
         ]
 
         # Entrenar cada modelo
@@ -371,7 +342,7 @@ if __name__ == "__main__":
             print(f"🔧 ENTRENANDO MODELO PARA: {config['etiqueta']}")
             print(f"{'='*60}")
 
-            metricas = entrenar_modelo_t5(
+            metricas = entrenar_modelo(
                 df=df,
                 etiqueta=config["etiqueta"],
                 nombre_modelo=config["nombre_modelo"]
